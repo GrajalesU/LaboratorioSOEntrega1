@@ -8,4 +8,5 @@ double illness_prob_age(items_t array, int age);
 
 int* citizens_per_city(items_t items);
 
+int* citizens_per_age(items_t items, int age);
 #endif
