@@ -6,4 +6,6 @@ typedef item_t items_t[150000];
 
 double illness_prob_age(items_t array, int age);
 
+int* citizens_per_city(items_t items);
+
 #endif
