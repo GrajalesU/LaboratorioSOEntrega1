@@ -87,6 +87,8 @@ int main(int argc, char *argv[])
 	printf("%.3f %%\n", result);
 
 	citizens_per_city(items);
-	
+
+	citizens_per_age(items, 65);
+
 	exit(EXIT_SUCCESS);
 }
