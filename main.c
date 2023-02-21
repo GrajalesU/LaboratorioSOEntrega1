@@ -86,5 +86,7 @@ int main(int argc, char *argv[])
 	double result = illness_prob_age(items, 65);
 	printf("%.3f %%\n", result);
 
+	citizens_per_city(items);
+	
 	exit(EXIT_SUCCESS);
 }
