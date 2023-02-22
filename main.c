@@ -3,6 +3,7 @@
 #include <string.h>
 #include <sys/types.h>
 #include "base_struct.c"
+#include "linked_list.c"
 #include "array.c"
 
 const int SIZE = 150000;
@@ -22,7 +23,8 @@ int main(int argc, char *argv[])
 	int line_number = 0;
 
 	items_t items;
-	
+	node_t *head = NULL;
+
 	while ((read = getline(&line, &len, fp)) != -1)
 	{
 		if (line_number > 0)
@@ -74,6 +76,7 @@ int main(int argc, char *argv[])
 				i++;
 			}
 			items[line_number - 1] = element;
+			add_to_list(&head, element);
 		}
 		line = NULL;
 		line_number++;
@@ -83,8 +86,11 @@ int main(int argc, char *argv[])
 	if (line)
 		free(line);
 
+	item_t pos_2 = get_from_list(head, 2, SIZE);
+	printf("Item en la posición 3: id=%u, city=%s, age=%u, gender=%s, income=%d, illness=%s\n",
+		   pos_2.id, city_names[pos_2.city], pos_2.age, gender_names[pos_2.gender], pos_2.income, illness_values[pos_2.illness]);
+
 	double result = illness_prob_age(items, 65);
-	printf("%.3f %%\n", result);
 
 	citizens_per_city(items);
 
@@ -92,6 +98,6 @@ int main(int argc, char *argv[])
 
 	item_t *new_array = add_item_in_middle(items, SIZE, items[0]);
 
-	printf("(income, id) | new data: (%i, %i), last data: (%i, %i)\n",new_array[75000].income,new_array[75000].id, new_array[150000].income, new_array[150000].id);
+	printf("(income, id) | new data: (%i, %i), last data: (%i, %i)\n", new_array[75000].income, new_array[75000].id, new_array[150000].income, new_array[150000].id);
 	exit(EXIT_SUCCESS);
 }
