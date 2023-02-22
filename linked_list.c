@@ -56,3 +56,29 @@ void add_item_in_middle_ll(node_t *head, item_t new_item)
         }
     }
 }
+
+double illness_prob_age_ll(node_t *head, int age)
+{
+    node_t *current = head;
+
+    int total = 0;
+    int total_illness = 0;
+
+    while (current != NULL)
+    {
+        if (current->item.age >= age)
+        {
+            total += 1;
+            if (current->item.illness == true)
+            {
+                total_illness += 1;
+            }
+        }
+
+        current = current->next;
+    }
+
+    double result = (double)total_illness / total;
+    result *= 100;
+    return result;
+}
