@@ -9,4 +9,6 @@ double illness_prob_age(items_t array, int age);
 int* citizens_per_city(items_t items);
 
 int* citizens_per_age(items_t items, int age);
+
+item_t *add_item_in_middle(items_t array, int current_size, item_t item);
 #endif
