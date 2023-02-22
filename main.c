@@ -90,5 +90,8 @@ int main(int argc, char *argv[])
 
 	citizens_per_age(items, 65);
 
+	item_t *new_array = add_item_in_middle(items, SIZE, items[0]);
+
+	printf("(income, id) | new data: (%i, %i), last data: (%i, %i)\n",new_array[75000].income,new_array[75000].id, new_array[150000].income, new_array[150000].id);
 	exit(EXIT_SUCCESS);
 }
