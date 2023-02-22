@@ -91,7 +91,8 @@ int main(int argc, char *argv[])
 		   pos_2.id, city_names[pos_2.city], pos_2.age, gender_names[pos_2.gender], pos_2.income, illness_values[pos_2.illness]);
 
 	double result = illness_prob_age(items, 65);
-
+	double result_ll = illness_prob_age_ll(head, 65);
+	printf("%.3f%%, %.3f%% illness prob to 65 years\n", result, result_ll);
 	citizens_per_city(items);
 
 	citizens_per_age(items, 65);
