@@ -1,9 +1,10 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include "base_struct.c"
 
 struct node     //make node for linked list using structure
 {
-    int value;            //value part of node contains the element
+    item_t value;            //value part of node contains the element
     struct node *next;    //the next part of node contains the address of next element of list
 };
 
@@ -14,7 +15,7 @@ void init()
     head=NULL;    //initialize the beginning(head) of list to NULL
 }
 
-void insertfirst(int element)   //inserts element in linked list
+void insertfirst(item_t element)   //inserts element in linked list
 {
     struct node *New;
     New=(struct node*)malloc(sizeof(struct node));    //New named node declared with size of node declared before
@@ -44,13 +45,14 @@ void print()
     printf("number of nodes %d\n",count);
 }
 
-void deleteitem(int ele)
+
+void deleteitem(item_t ele)
 {
     if(head==NULL)
         printf("list is empty and nothing to delete\n");
     struct node* cur=head;
     struct node* prev=NULL;
-    while(cur->value!=ele)
+    while(cur->value.id!=ele.id)
     {
         prev=cur;
         cur=cur->next;
@@ -60,20 +62,22 @@ void deleteitem(int ele)
     free(cur);                      //memory of the structure cur is deallocated
 }
 
-int searchitem(int ele)
+
+int searchitem(item_t ele)
 {
     struct node* temp ;
 	temp = head;
 	while (temp != 0)
 	{
-		if (temp->value == ele)
+		if (temp->value.id == ele.id)
             return 1 ;          //element is found
 		temp = temp->next;
 	}
 	return 0 ;
 }
 
-void insertlast(int ele)    //insert at the last of linked list
+
+void insertlast(item_t ele)    //insert at the last of linked list
 {
     struct node *New, *temp;
     New = (struct node*)malloc(sizeof(struct node));
@@ -122,14 +126,14 @@ void deletefirst()    //delete the first element
     free(cur);
 }
 
-void insertafter(int elem, int num)   //inserts element for any given element present in linked list
+void insertafter(item_t elem, int num)   //inserts element for any given element present in linked list
 {
     struct node* New;
     New=(struct node*)malloc(sizeof(struct node));
     New->value=elem;
     New->next=NULL;
     struct node* prev=head;
-    while(prev->value!=num)
+    while(prev->value.id!=num)
     {
         prev=prev->next;
     }
@@ -160,25 +164,12 @@ void reverselist()    //reverse the linked list
     head=prev;      //points the head pointer to prev as it the new head or beginning in reverse list
 }
 
-void sum()    //sum of elements of the linked list
-{
-    int s;
-    struct node *cur=head;
-    s=0;
-    while(cur!=NULL)
-    {
-        s+=cur->value;
-        cur=cur->next;
-    }
-    printf("Sum of elements is %d\n",s);
-}
-
-
 int main()
 {
     init();
 
-    int ch,element;
+    int ch;
+    item_t element;
     while(1)
     {
         printf("\n1. Insert new item. 2. Delete item. 3. Search item. 4. Insert Last. 5. Print. 6.Delete Last 7.Delete First 8.Insert After 9.Print Linked List in Reverse way. 10.Sum 11.Make the linked list reverse 12.Exit\n--------------------------------------------------------------------------------------\n");
@@ -192,14 +183,15 @@ int main()
         }
         else if(ch==2)
         {
-            int de;
+            item_t de;
             printf("enter element to delete ");
             scanf("%d",&de);
             deleteitem(de);
         }
         else if(ch==3)
         {
-            int se,reply;
+            int reply;
+            item_t se;
             printf("enter element to search ");
             scanf("%d",&se);
             reply=searchitem(se);
@@ -210,7 +202,7 @@ int main()
         }
         else if(ch==4)
         {
-            int le;
+            item_t le;
             printf("enter element to insert at last ");
             scanf("%d",&le);
             insertlast(le);
@@ -229,7 +221,8 @@ int main()
         }
         else if(ch==8)
         {
-            int ie,p;
+            int p;
+            item_t ie;
             printf("enter element to insert: ");
             scanf("%d",&ie);
             printf("enter after which element to insert: ");
