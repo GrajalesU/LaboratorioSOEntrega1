@@ -14,4 +14,6 @@ item_t get_from_list(node_t *head, int position, int list_size);
 
 void add_item_in_middle_ll(node_t *head, item_t new_item);
 
+double illness_prob_age_ll(node_t *head, int age);
+
 #endif
