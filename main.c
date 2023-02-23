@@ -10,6 +10,7 @@ const int SIZE = 150000;
 
 int main(int argc, char *argv[])
 {
+	
 	FILE *fp;
 	char *line = NULL;
 	size_t len = 0;
@@ -110,9 +111,9 @@ int main(int argc, char *argv[])
 
 	printf("(income, id) | new data: (%i, %i), last data: (%i, %i)\n", new_array[75000].income, new_array[75000].id, new_array[150000].income, new_array[150000].id);
 	
-	average_income_city_range(items, 30000, 50000, "Dallas");
+	average_income_city_range(items, 30000, 50000, get_city_t("Dallas"));
 
-	average_income_city_range_ll(head, 30000, 50000, "Dallas");
+	average_income_city_range_ll(head, 30000, 50000, get_city_t("Dallas") );
 	
 	exit(EXIT_SUCCESS);
 }

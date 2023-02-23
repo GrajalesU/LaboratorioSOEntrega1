@@ -82,14 +82,14 @@ item_t *add_item_in_middle(items_t array, int current_size, item_t item)
     return new_array;
 }
 
-double average_income_city_range(items_t items, int min_age, int max_age, char city)
+double average_income_city_range(items_t items, int min_age, int max_age, city_t city)
 { // Solucion al ejercicio 2, obtiene el promedio de ingresos de todas las personas que viven en una determinada ciudad y que tienen entre X y Y años (X y Y incluidos).
     double result = 0.0;
     int selected_people = 0;
     double incomes_sum = 0.0;
     
     for (int i = 0; i < 150000; i++) {
-        if (strcmp(items[i].city, get_city_t(city)) == 0 && items[i].age >= min_age && items[i].age <= max_age) {
+        if (items[i].city==city && items[i].age >= min_age && items[i].age <= max_age) {
             incomes_sum += items[i].income;
             selected_people++;
         }
@@ -99,6 +99,6 @@ double average_income_city_range(items_t items, int min_age, int max_age, char c
         result = incomes_sum / selected_people;
         
     } 
-    printf("%c, %d\n", city, result); // Esto se borra después porque los resultados se imprimen en el documento que hay que generar
+    //printf("%c, %d\n", city, result); // Esto se borra después porque los resultados se imprimen en el documento que hay que generar
     return result;
 }
