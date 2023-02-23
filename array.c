@@ -2,7 +2,7 @@
 #include "array.h"
 
 double illness_prob_age(items_t items, int age)
-{
+{ // Solucion al ejercicio 3, reporta la probabilidad de estar enfermo cuando se tiene X o más años.
     int total = 0;
     int total_illness = 0;
 
@@ -57,7 +57,7 @@ int *citizens_per_age(items_t items, int age)
 }
 
 item_t *add_item_in_middle(items_t array, int current_size, item_t item)
-{
+{ // Solucion al ejercicio 5, inserta un nuevo elemento en la mitad de los datos
     int new_size = current_size + 1;
     item_t *new_array = (item_t *)malloc(new_size * sizeof(item_t));
     int half = (current_size / 2) - 1;
