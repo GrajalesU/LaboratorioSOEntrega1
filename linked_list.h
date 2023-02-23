@@ -16,4 +16,6 @@ void add_item_in_middle_ll(node_t *head, item_t new_item);
 
 double illness_prob_age_ll(node_t *head, int age);
 
+double average_income_city_range_ll(node_t *head, int min_age, int max_age, char city)
+
 #endif

@@ -82,3 +82,27 @@ double illness_prob_age_ll(node_t *head, int age)
     result *= 100;
     return result;
 }
+
+double average_income_city_range_ll(node_t *head, int min_age, int max_age, char city)
+{ // Solucion al ejercicio 2, obtiene el promedio de ingresos de todas las personas que viven en una determinada ciudad y que tienen entre X y Y años (X y Y incluidos).
+    double result = 0.0;
+    int selected_people = 0;
+    double incomes_sum = 0.0;
+    node_t *current = head;
+    
+    while (current != NULL)
+    {
+        if (strcmp(current->item.city, get_city_t(city)) == 0 && current->item.age >= min_age && current->item.age <= max_age) {
+            incomes_sum += current->item.income;
+            selected_people++;
+        }
+        current = current->next;
+    }
+    
+    if (selected_people > 0) {
+        result = incomes_sum / selected_people;
+        
+    } 
+    printf("%c, %d\n", city, result); // Esto se borra después porque los resultados se imprimen en el documento que hay que generar
+    return result;
+}
