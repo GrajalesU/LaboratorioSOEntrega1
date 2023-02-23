@@ -63,17 +63,17 @@ void deleteitem(item_t ele)
 }
 
 
-int searchitem(item_t ele)
+int searchitem(int id)
 {
     struct node* temp ;
 	temp = head;
 	while (temp != 0)
 	{
-		if (temp->value.id == ele.id)
-            return 1 ;          //element is found
+		if (temp->value.id == id)
+            return 1;          //element is found
 		temp = temp->next;
 	}
-	return 0 ;
+	return 0;
 }
 
 
@@ -191,10 +191,10 @@ int main()
         else if(ch==3)
         {
             int reply;
-            item_t se;
+            int id;
             printf("enter element to search ");
-            scanf("%d",&se);
-            reply=searchitem(se);
+            scanf("%d",&id);
+            reply=searchitem(id);
             if(reply==1)
                 printf("element found\n");
             else
