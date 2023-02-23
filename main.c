@@ -109,5 +109,8 @@ int main(int argc, char *argv[])
 	printf("id= %i, income= %i \n", middle_element.id, middle_element.income);
 
 	printf("(income, id) | new data: (%i, %i), last data: (%i, %i)\n", new_array[75000].income, new_array[75000].id, new_array[150000].income, new_array[150000].id);
+	
+	average_income_city_range(items, 150000, 30000, 5000, "Dallas");
+	
 	exit(EXIT_SUCCESS);
 }
