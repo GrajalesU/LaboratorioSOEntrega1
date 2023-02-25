@@ -121,11 +121,12 @@ int main(int argc, char *argv[])
 	exit(EXIT_SUCCESS);
 }
 
-void show_menu(items_t items_t, node_t *head)
+void show_menu(items_t items, node_t *head)
 {
 	int option;
 	clock_t start, end;
 	double cpu_time_used_array, cpu_time_used_ll;
+
 	do
 	{
 		printf("1. Cantidad de personas por cada ciudad. \n");
@@ -144,7 +145,7 @@ void show_menu(items_t items_t, node_t *head)
 		case 1:
 			//tomar tiempo de array
 			start = clock();
-			int *cities = citizens_per_city(items_t);
+			int *cities = citizens_per_city(items);
 			end = clock();
 			cpu_time_used_array = ((double)(end - start)) / CLOCKS_PER_SEC;
 			//tomar tiempo de lista ligada
@@ -167,25 +168,62 @@ void show_menu(items_t items_t, node_t *head)
 			printf("------\n\n");
 			break;
 
-			case 2:
+		case 2:
+			printf("------\n");
+			printf("Escribe la ciudad: ");
+			printf("Dallas: 0, New York City: 1, Los Angeles: 2, Mountain View: 3\n");
+			printf("Boston: 4, Washington D.C: 5, San Diego: 6, Austin: 7\n");
+			int selected_city;
+
+			scanf("%i", &selected_city);
+			const char *current_city = city_names[selected_city];
+
+			if (current_city == "Error")
+			{
+				printf("Ciudad inválida\n\n");
+				break;
+			}
+			int current_min_age;
+			printf("Escribe el inicio del rango de edad (X): ");
+			scanf("%d", &current_min_age);
+
+			int current_max_age;
+			printf("Escribe el final del rango de edad (Y): ");
+			scanf("%d", &current_max_age);
+
+			start = clock();
+			double current_income = average_income_city_range(items, current_min_age, current_max_age, selected_city);
+			end = clock();
+			cpu_time_used_array = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+			start = clock();
+			average_income_city_range_ll(head, current_min_age, current_max_age, selected_city);
+			end = clock();
+			cpu_time_used_ll = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+			printf("El promedio de ingresos de todas las personas que viven en %s\n", current_city);
+			printf("Que tienen entre %d y %d años, es de %.4f Dolares\n", current_min_age, current_max_age, current_income);
+			printf("Tiempo array: %.9f, Tiempo Lista ligada: %.9f \n", cpu_time_used_array, cpu_time_used_ll);
+			printf("------\n\n");
+
 			break;
 
-			case 3:
+		case 3:
 			break;
 
-			case 4:
+		case 4:
 			break;
 
-			case 5:
+		case 5:
 			break;
 
-			case 6:
+		case 6:
 			break;
 
-			case 7:
+		case 7:
 			break;
 
-			default:
+		default:
 			break;
 		}
 	} while (option != 8);
