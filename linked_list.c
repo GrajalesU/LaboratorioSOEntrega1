@@ -34,28 +34,58 @@ item_t get_from_list(node_t *head, int position, int list_size)
 
 /**
  *
- * Inserta un elemento en la mitad de la lista
+ * Solucion al ejercicio 1
+ * Reporta la cantidad de personas por cada ciudad.
  */
-void add_item_in_middle_ll(node_t *head, item_t new_item)
+
+int *citizens_per_city_ll(node_t *head)
 {
-    node_t *current_node = head;
-    node_t *new_node;
-    new_node->item = new_item;
-    new_node->item.id = 75000;
-    for (int i = 0; i <= 75000; i++)
+    node_t *current = head;
+    int *cities = (int *)calloc(10, sizeof(int));
+    while (current != NULL)
     {
-        current_node->item.id += 1;
-        if (i == 75000)
-        {
-            new_node->next = current_node->next;
-            current_node->next = new_node;
-        }
-        else
-        {
-            current_node = current_node->next;
-        }
+        cities[current->item.city]++; 
+        current = current->next;      
     }
+    printf("%i, %i, %i, %i, %i, %i, %i, %i, %i, %i\n", cities[0], cities[1], cities[2], cities[3], cities[4], cities[5], cities[6], cities[7], cities[8], cities[9]);
+    return cities;
 }
+
+/**
+ *
+ * Solucion al ejercicio 2
+ * Obtiene el promedio de ingresos de todas las personas que viven en una determinada ciudad y que tienen entre X y Y años (X y Y incluidos).
+ */
+
+double average_income_city_range_ll(node_t *head, int min_age, int max_age, city_t city)
+{ 
+    double result = 0.0;
+    int selected_people = 0;
+    double incomes_sum = 0.0;
+    node_t *current = head;
+    
+    while (current != NULL)
+    {
+        if (current->item.city==city && current->item.age >= min_age && current->item.age <= max_age) {
+            incomes_sum += current->item.income;
+            selected_people++;
+        }
+        current = current->next;
+    }
+    
+    if (selected_people > 0) {
+        result = incomes_sum / selected_people;
+        
+    } 
+    //printf("%c, %d\n", city, result); // Esto se borra después porque los resultados se imprimen en el documento que hay que generar
+    return result;
+}
+
+/**
+ *
+ * Solucion al ejercicio 3
+ * Reporta la probabilidad de estar enfermo cuando se tiene X o más años.
+ */
 
 double illness_prob_age_ll(node_t *head, int age)
 {
@@ -83,26 +113,54 @@ double illness_prob_age_ll(node_t *head, int age)
     return result;
 }
 
-double average_income_city_range_ll(node_t *head, int min_age, int max_age, city_t city)
-{ // Solucion al ejercicio 2, obtiene el promedio de ingresos de todas las personas que viven en una determinada ciudad y que tienen entre X y Y años (X y Y incluidos).
-    double result = 0.0;
-    int selected_people = 0;
-    double incomes_sum = 0.0;
-    node_t *current = head;
-    
-    while (current != NULL)
+/**
+ *
+ * Solucion al punto 5
+ * Inserta un elemento en la mitad de la lista
+ */
+
+void add_item_in_middle_ll(node_t *head, item_t new_item)
+{
+    node_t *current_node = head;
+    node_t *new_node;
+    new_node->item = new_item;
+    new_node->item.id = 75000;
+    for (int i = 0; i <= 75000; i++)
     {
-        if (current->item.city==city && current->item.age >= min_age && current->item.age <= max_age) {
-            incomes_sum += current->item.income;
-            selected_people++;
+        current_node->item.id += 1;
+        if (i == 75000)
+        {
+            new_node->next = current_node->next;
+            current_node->next = new_node;
+        }
+        else
+        {
+            current_node = current_node->next;
+        }
+    }
+}
+
+/**
+ *
+ * Solucion al ejercicio 6
+ * Reporta la cantidad de personas por cada ciudad con X edad.
+ */
+
+int *citizens_per_age_ll(node_t *head, int age)
+{ 
+    node_t *current = head;
+    int *cities = (int *)calloc(10, sizeof(int));
+    while(current != NULL)
+    {
+        if (current->item.age == age)
+        {
+            cities[current->item.city]++; 
         }
         current = current->next;
     }
-    
-    if (selected_people > 0) {
-        result = incomes_sum / selected_people;
-        
-    } 
-    //printf("%c, %d\n", city, result); // Esto se borra después porque los resultados se imprimen en el documento que hay que generar
-    return result;
+
+    printf("%i, %i, %i, %i, %i, %i, %i, %i, %i, %i\n", cities[0], cities[1], cities[2], cities[3], cities[4], cities[5], cities[6], cities[7], cities[8], cities[9]);
+
+    return cities;
 }
+
