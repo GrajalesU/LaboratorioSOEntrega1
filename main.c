@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
+#include <time.h>
 #include "base_struct.c"
 #include "linked_list.c"
 #include "array.c"
@@ -10,7 +11,6 @@ const int SIZE = 150000;
 
 int main(int argc, char *argv[])
 {
-	
 	FILE *fp;
 	char *line = NULL;
 	size_t len = 0;
@@ -87,37 +87,106 @@ int main(int argc, char *argv[])
 	if (line)
 		free(line);
 
-	item_t pos_2 = get_from_list(head, 2, SIZE);
-	printf("Item en la posición 3: id=%u, city=%s, age=%u, gender=%s, income=%d, illness=%s\n",
-		   pos_2.id, city_names[pos_2.city], pos_2.age, gender_names[pos_2.gender], pos_2.income, illness_values[pos_2.illness]);
+	// item_t pos_2 = get_from_list(head, 2, SIZE);
+	// printf("Item en la posición 3: id=%u, city=%s, age=%u, gender=%s, income=%d, illness=%s\n",
+	// 	   pos_2.id, city_names[pos_2.city], pos_2.age, gender_names[pos_2.gender], pos_2.income, illness_values[pos_2.illness]);
 
-	double result = illness_prob_age(items, 65);
-	double result_ll = illness_prob_age_ll(head, 65);
-	printf("%.3f%%, %.3f%% illness prob to 65 years\n", result, result_ll);
+	// double result = illness_prob_age(items, 65);
+	// double result_ll = illness_prob_age_ll(head, 65);
+	// printf("%.3f%%, %.3f%% illness prob to 65 years\n", result, result_ll);
 
-	citizens_per_city(items);
-	citizens_per_city_ll(head);
+	// citizens_per_city(items);
+	// citizens_per_city_ll(head);
 
-	citizens_per_age(items, 65);
-	citizens_per_age_ll(head, 65);
+	// citizens_per_age(items, 65);
+	// citizens_per_age_ll(head, 65);
 
-	item_t *new_array = add_item_in_middle(items, SIZE, items[0]);
-	add_item_in_middle_ll(head, items[0]);
+	// item_t *new_array = add_item_in_middle(items, SIZE, items[0]);
+	// add_item_in_middle_ll(head, items[0]);
 
-	item_t last_element = get_from_list(head, 150001, 150001);
+	// item_t last_element = get_from_list(head, 150001, 150001);
 
-	printf("id= %i \n", last_element.id);
+	// printf("id= %i \n", last_element.id);
 
-	item_t middle_element = get_from_list(head, 74999, 150001);
-	printf("id= %i, income= %i \n", items[0].id, items[0].income);
-	printf("id= %i, income= %i \n", middle_element.id, middle_element.income);
+	// item_t middle_element = get_from_list(head, 74999, 150001);
+	// printf("id= %i, income= %i \n", items[0].id, items[0].income);
+	// printf("id= %i, income= %i \n", middle_element.id, middle_element.income);
 
-	printf("(income, id) | new data: (%i, %i), last data: (%i, %i)\n", new_array[75000].income, new_array[75000].id, new_array[150000].income, new_array[150000].id);
+	// printf("(income, id) | new data: (%i, %i), last data: (%i, %i)\n", new_array[75000].income, new_array[75000].id, new_array[150000].income, new_array[150000].id);
 
-	
-	average_income_city_range(items, 30000, 50000, get_city_t("Dallas"));
+	// average_income_city_range(items, 30000, 50000, get_city_t("Dallas"));
 
-	average_income_city_range_ll(head, 30000, 50000, get_city_t("Dallas") );
-	
+	// average_income_city_range_ll(head, 30000, 50000, get_city_t("Dallas") );
+	show_menu(items, head);
 	exit(EXIT_SUCCESS);
+}
+
+void show_menu(items_t items_t, node_t *head)
+{
+	int option;
+	clock_t start, end;
+	double cpu_time_used_array, cpu_time_used_ll;
+	do
+	{
+		printf("1. Cantidad de personas por cada ciudad. \n");
+		printf("2. Promedio de ingresos de todas las personas que viven en una ");
+		printf("determinada ciudad y que tiene entre X y Y a%cos (X y Y incluidos).\n", 204);
+		printf("3. Probabilidad de estar enfermo cuando se tiene X o mas a%cos. \n", 164);
+		printf("4. Recuperar elemento a partir de su ID. \n");
+		printf("5. Insertar un nuevo elemento en la mitad de los datos. \n");
+		printf("6. Cantidad de personas que viven en cada ciudad y ademas tiene X a%cos. \n", 164);
+		printf("7. Generar reporte en un archivo de salida con los resultados de la invocacion de ");
+		printf("cada una de las funciones anteriores. \n");
+		printf("8. Terminar. \n");
+		scanf("%d", &option);
+		switch (option)
+		{
+		case 1:
+			//tomar tiempo de array
+			start = clock();
+			int *cities = citizens_per_city(items_t);
+			end = clock();
+			cpu_time_used_array = ((double)(end - start)) / CLOCKS_PER_SEC;
+			//tomar tiempo de lista ligada
+			start = clock();
+			citizens_per_city_ll(head);
+			end = clock();
+			cpu_time_used_ll = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+			printf("------\n");
+			printf("Dallas: %i ,", cities[0]);
+			printf("New York City: %i ,", cities[1]);
+			printf("Los Angeles: %i \n", cities[2]);
+			printf("Mountain View: %i ,", cities[3]);
+			printf("Boston: %i ,", cities[4]);
+			printf("Washington D.C: %i \n", cities[5]);
+			printf("San Diego: %i ,", cities[6]);
+			printf("Austin: %i ,", cities[7]);
+			printf("No registra: %i \n", cities[8]);
+			printf("Tiempo array: %.9f, Tiempo Lista ligada: %.9f \n", cpu_time_used_array, cpu_time_used_ll);
+			printf("------\n\n");
+			break;
+
+			case 2:
+			break;
+
+			case 3:
+			break;
+
+			case 4:
+			break;
+
+			case 5:
+			break;
+
+			case 6:
+			break;
+
+			case 7:
+			break;
+
+			default:
+			break;
+		}
+	} while (option != 8);
 }
