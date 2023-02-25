@@ -209,6 +209,32 @@ void show_menu(items_t items, node_t *head)
 			break;
 
 		case 3:
+			printf("------\n");
+			printf("Escribe la edad: ");
+
+			int current_age;
+			scanf("%i", &current_age);
+			if (current_age < 0 || current_age > 65)
+			{
+				printf("Esta edad no puede ser calculada\n\n");
+				break;
+			}
+
+			start = clock();
+			double illness_prob = illness_prob_age(items, current_age);
+			end = clock();
+			cpu_time_used_array = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+			start = clock();
+			illness_prob_age_ll(head, current_age);
+			end = clock();
+			cpu_time_used_ll = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+
+			printf("La probabilidad de estar enfermo cuando se tiene %i o más años es de %.3f%% \n", current_age, illness_prob);
+			printf("Tiempo array: %.9f, Tiempo Lista ligada: %.9f \n", cpu_time_used_array, cpu_time_used_ll);
+			printf("------\n\n");
+
 			break;
 
 		case 4:
