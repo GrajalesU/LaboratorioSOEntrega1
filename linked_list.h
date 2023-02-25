@@ -18,4 +18,8 @@ double illness_prob_age_ll(node_t *head, int age);
 
 double average_income_city_range_ll(node_t *head, int min_age, int max_age, city_t city);
 
+int *citizens_per_city_ll(node_t *head);
+
+int *citizens_per_age_ll(node_t *head, int age);
+
 #endif
