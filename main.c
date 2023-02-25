@@ -94,9 +94,12 @@ int main(int argc, char *argv[])
 	double result = illness_prob_age(items, 65);
 	double result_ll = illness_prob_age_ll(head, 65);
 	printf("%.3f%%, %.3f%% illness prob to 65 years\n", result, result_ll);
+
 	citizens_per_city(items);
+	citizens_per_city_ll(head);
 
 	citizens_per_age(items, 65);
+	citizens_per_age_ll(head, 65);
 
 	item_t *new_array = add_item_in_middle(items, SIZE, items[0]);
 	add_item_in_middle_ll(head, items[0]);
@@ -110,6 +113,7 @@ int main(int argc, char *argv[])
 	printf("id= %i, income= %i \n", middle_element.id, middle_element.income);
 
 	printf("(income, id) | new data: (%i, %i), last data: (%i, %i)\n", new_array[75000].income, new_array[75000].id, new_array[150000].income, new_array[150000].id);
+
 	
 	average_income_city_range(items, 30000, 50000, get_city_t("Dallas"));
 
