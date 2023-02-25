@@ -47,7 +47,6 @@ int *citizens_per_city_ll(node_t *head)
         cities[current->item.city]++;
         current = current->next;
     }
-    printf("%i, %i, %i, %i, %i, %i, %i, %i, %i, %i\n", cities[0], cities[1], cities[2], cities[3], cities[4], cities[5], cities[6], cities[7], cities[8], cities[9]);
     return cities;
 }
 
