@@ -44,7 +44,6 @@ double average_income_city_range(items_t items, int min_age, int max_age, city_t
     {
         result = incomes_sum / selected_people;
     }
-    //printf("%c, %d\n", city, result); // Esto se borra después porque los resultados se imprimen en el documento que hay que generar
     return result;
 }
 
@@ -71,7 +70,6 @@ double illness_prob_age(items_t items, int age)
         }
     }
 
-    printf("%i, %i\n", total, total_illness); // Esto se borra después porque los resultados se imprimen en el documento que hay que generar
 
     double result = (double)total_illness / total;
     result *= 100;

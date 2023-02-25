@@ -77,7 +77,6 @@ double average_income_city_range_ll(node_t *head, int min_age, int max_age, city
     {
         result = incomes_sum / selected_people;
     }
-    //printf("%c, %d\n", city, result); // Esto se borra después porque los resultados se imprimen en el documento que hay que generar
     return result;
 }
 
