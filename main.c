@@ -202,6 +202,40 @@ void show_menu(items_t items, node_t *head)
 			break;
 
 		case 6:
+			printf("------\n\n");
+			printf("Escribe la edad: ");
+
+			int citizen_age;
+			scanf("%i", &citizen_age);
+			if (citizen_age < 0 || citizen_age > 65)
+			{
+				printf("Esta edad no puede ser calculada\n\n");
+				break;
+			}
+
+			start = clock();
+			int *cities_per_age = citizens_per_age(items, citizen_age);
+			end = clock();
+			cpu_time_used_array = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+			start = clock();
+			citizens_per_age_ll(head, citizen_age);
+			end = clock();
+			cpu_time_used_ll = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+			printf("------\n");
+			printf("Dallas: %i ,", cities_per_age[0]);
+			printf("New York City: %i ,", cities_per_age[1]);
+			printf("Los Angeles: %i \n", cities_per_age[2]);
+			printf("Mountain View: %i ,", cities_per_age[3]);
+			printf("Boston: %i ,", cities_per_age[4]);
+			printf("Washington D.C: %i \n", cities_per_age[5]);
+			printf("San Diego: %i ,", cities_per_age[6]);
+			printf("Austin: %i ,", cities_per_age[7]);
+			printf("No registra: %i \n", cities_per_age[8]);
+			printf("Tiempo array: %.9f, Tiempo Lista ligada: %.9f \n", cpu_time_used_array, cpu_time_used_ll);
+			printf("------\n\n");
+
 			break;
 
 		case 7:
