@@ -22,4 +22,6 @@ int *citizens_per_city_ll(node_t *head);
 
 int *citizens_per_age_ll(node_t *head, int age);
 
+node_t* find_id_ll(node_t *head, int id);
+
 #endif
