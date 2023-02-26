@@ -137,9 +137,6 @@ void show_menu(items_t items, node_t *head)
 			item_t *found_item = find_id(items, 150000, id);
 			if (found_item != NULL) {
 
-
-			
-
     		printf(" \n>Recuerda que id corresponde la posición donde se encuentra el dato\n");
 			printf(" \n>Codigos de ciudad:\n(0:Dallas),(1:New York City),(2:Los Angeles),\n(3:Mountain view),(4:Boston), (5:Washington DC),\n(6:San Diego), (7:Austin), (8:No registra) \n");
 			printf(" \n>Luego la edad del encuestado\n");
@@ -187,16 +184,74 @@ void show_menu(items_t items, node_t *head)
 
 		case 5:
 			printf("------\n\n");
+			printf("Escribe la ciudad: ");
+			printf("Dallas: 0, New York City: 1, Los Angeles: 2, Mountain View: 3\n");
+			printf("Boston: 4, Washington D.C: 5, San Diego: 6, Austin: 7\n");
+			int new_item_id = 7500;
+
+			int new_item_city;
+			scanf("%i", &new_item_city);
+
+			const char *current_new_item_city = city_names[new_item_city];
+			if (strcmp(current_new_item_city, "Error") == 0)
+			{
+				printf("Ciudad inválida\n\n");
+				break;
+			}
+
+
+			printf("Escribe el genero: ");
+			printf("Femenino: 0, Masculino: 1 \n");
+
+
+			int new_item_gender;
+			scanf("%i", &new_item_gender);
+
+			const char *current_new_item_gender = gender_names[new_item_gender];
+			if (strcmp(current_new_item_gender, "No") == 0)
+			{
+				printf("Genero inválida\n\n");
+				break;
+			}
+
+			int new_item_age;
+			printf("Escribe la edad: ");
+			scanf("%i", &new_item_age);
+
+			if (new_item_age < 0 || new_item_age > 125)
+			{
+				printf("Esta edad no puede ser ingresada\n\n");
+				break;
+			}
+
+			int new_item_income; 
+			printf("Escribe el ingreso: ");
+			scanf("%i", &new_item_income);
+
+			if (new_item_income < 0 )
+			{
+				printf("Este ingreso no puede ser ingresado\n\n");
+				break;
+			}
+
+			int new_item_illness;
+			printf("Escribe si se encuentra enfermo: ");
+			printf("No: 0, Si: 1 \n");
+			scanf("%i", &new_item_illness);
+
+			item_t current_new_item = { new_item_id, new_item_city, new_item_age, new_item_gender, new_item_income, new_item_illness };
+    		// Ingresar registro con id:27, city:mountain view, gender:female, age:66, income:123456, illness:no
 			start = clock();
-			item_t *new_array = add_item_in_middle(items, SIZE, items[0]);
+			item_t *new_array = add_item_in_middle(items, SIZE, current_new_item);
 			end = clock();
 			cpu_time_used_array = ((double)(end - start)) / CLOCKS_PER_SEC;
 
 			start = clock();
-			add_item_in_middle_ll(head, items[0]);
+			add_item_in_middle_ll(head, current_new_item);
 			end = clock();
 			cpu_time_used_ll = ((double)(end - start)) / CLOCKS_PER_SEC;
-
+			
+			printf("Ingresado con exito ");
 			printf("Tiempo array: %.9f, Tiempo Lista ligada: %.9f \n", cpu_time_used_array, cpu_time_used_ll);
 			printf("------\n\n");
 			break;
