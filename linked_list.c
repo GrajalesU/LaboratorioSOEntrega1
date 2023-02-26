@@ -112,6 +112,41 @@ double illness_prob_age_ll(node_t *head, int age)
     return result;
 }
 
+
+
+/**
+ *
+ * Solución al punto 4
+ * Inserta un elemento en la mitad de la lista
+ */
+
+
+
+node_t* find_id_ll(node_t *head, int id) {
+    node_t *current_node = head;
+
+    while (current_node != NULL) {
+        if (current_node->item.id == id) {
+            return current_node;
+        }
+        current_node = current_node->next;
+    }
+
+    return NULL;
+}
+
+int count_items(node_t* head) {
+    int count = 0;
+    node_t* current = head;
+    while (current != NULL) {
+        count++;
+        current = current->next;
+    }
+    return count;
+}
+
+
+
 /**
  *
  * Solución al punto 5
@@ -121,8 +156,11 @@ double illness_prob_age_ll(node_t *head, int age)
 void add_item_in_middle_ll(node_t *head, item_t new_item)
 {
     node_t *current_node = head;
-    node_t *new_node;
+    /**node_t *new_node;**/
+    node_t *new_node = malloc(sizeof(node_t));
     new_node->item = new_item;
+
+
     new_node->item.id = 75000;
     for (int i = 0; i <= 75000; i++)
     {
