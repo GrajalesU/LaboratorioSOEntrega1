@@ -76,6 +76,19 @@ double illness_prob_age(items_t items, int age)
     return result;
 }
 
+/* 
+ejercicio 4: encontrar por id
+Función para encontrar un elemento por su id */
+
+item_t* find_id(item_t *arr, int size, int id) {
+  int index = id - 1; // Índice del elemento en el array
+  if (index < 0 || index >= size) { // Verificar si el índice es válido
+    return NULL; // El índice no es válido, se retorna NULL
+  }
+  return &arr[index]; // Se retorna el puntero al elemento del índice correspondiente
+}
+
+
 /**
  *
  * Solución al ejercicio 5
@@ -130,3 +143,27 @@ int *citizens_per_age(items_t items, int age)
 
     return cities;
 }
+
+
+void print_item(item_t* item) {
+    printf("ID: %d\n", item->id);
+    /*printf("City: %s\n", item->city);*/
+    printf("City: %d\n", item->city);
+    
+    /*printf("Age: %s\n", item->age);*/
+    printf("Age: %d\n", item->age);
+
+
+    /*printf("Gender: %lf\n", item->gender);
+    printf("Income: %lf\n", item->income);
+    printf("Illness: %lf\n", item->illness);*/
+
+    printf("Gender: %u\n", item->gender);
+    printf("Income: %d\n", item->income);
+    printf("Illness: %u\n", item->illness);
+
+
+
+}
+
+
