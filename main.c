@@ -186,6 +186,19 @@ void show_menu(items_t items, node_t *head)
 			break;
 
 		case 5:
+			printf("------\n\n");
+			start = clock();
+			item_t *new_array = add_item_in_middle(items, SIZE, items[0]);
+			end = clock();
+			cpu_time_used_array = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+			start = clock();
+			add_item_in_middle_ll(head, items[0]);
+			end = clock();
+			cpu_time_used_ll = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+			printf("Tiempo array: %.9f, Tiempo Lista ligada: %.9f \n", cpu_time_used_array, cpu_time_used_ll);
+			printf("------\n\n");
 			break;
 
 		case 6:
