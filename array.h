@@ -13,4 +13,11 @@ int* citizens_per_city(items_t items);
 int* citizens_per_age(items_t items, int age);
 
 item_t *add_item_in_middle(items_t array, int current_size, item_t item);
+
+
+item_t* find_id(item_t *arr, int size, int id);
+void print_item(item_t* item);
+
+
+
 #endif
