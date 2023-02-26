@@ -130,6 +130,7 @@ void show_menu(items_t items, node_t *head)
 			break;
 
 		case 4:
+			printf("------\n\n");
 			int id;
 			printf("Ingrese el id del elemento a buscar: ");
 			scanf("%d", &id);
@@ -192,7 +193,7 @@ void show_menu(items_t items, node_t *head)
 
 		case 7:
 
-
+			printf("------\n\n");
 			// Abrir archivo de reporte si es que existe, en modo a de append y +
 			FILE *report_file = fopen("reporte.txt", "a+");
 			if (report_file == NULL) {
