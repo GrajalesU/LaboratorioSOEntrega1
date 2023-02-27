@@ -7,7 +7,6 @@
 #include "linked_list.c"
 #include "array.c"
 
-
 const int SIZE = 150000;
 
 void show_menu(items_t items, node_t *head)
@@ -32,12 +31,11 @@ void show_menu(items_t items, node_t *head)
 		switch (option)
 		{
 		case 1:
-			//tomar tiempo de array
 			start = clock();
 			int *cities = citizens_per_city(items);
 			end = clock();
 			cpu_time_used_array = ((double)(end - start)) / CLOCKS_PER_SEC;
-			//tomar tiempo de lista ligada
+
 			start = clock();
 			citizens_per_city_ll(head);
 			end = clock();
@@ -67,7 +65,6 @@ void show_menu(items_t items, node_t *head)
 			scanf("%i", &selected_city);
 			const char *current_city = city_names[selected_city];
 
-			/* antes if (current_city == "Error")*/
 			if (strcmp(current_city, "Error") == 0)
 			{
 				printf("Ciudad inválida\n\n");
@@ -120,9 +117,6 @@ void show_menu(items_t items, node_t *head)
 			end = clock();
 			cpu_time_used_ll = ((double)(end - start)) / CLOCKS_PER_SEC;
 
-			
-			
-
 			printf("La probabilidad de estar enfermo cuando se tiene %i o más años es de %.3f%% \n", current_age, illness_prob);
 			printf("Tiempo array: %.9f, Tiempo Lista ligada: %.9f \n", cpu_time_used_array, cpu_time_used_ll);
 			printf("------\n\n");
@@ -135,33 +129,37 @@ void show_menu(items_t items, node_t *head)
 			printf("Ingrese el id del elemento a buscar: ");
 			scanf("%d", &id);
 			item_t *found_item = find_id(items, 150000, id);
-			if (found_item != NULL) {
+			if (found_item != NULL)
+			{
 
-    		printf(" \n>Recuerda que id corresponde la posición donde se encuentra el dato\n");
-			printf(" \n>Codigos de ciudad:\n(0:Dallas),(1:New York City),(2:Los Angeles),\n(3:Mountain view),(4:Boston), (5:Washington DC),\n(6:San Diego), (7:Austin), (8:No registra) \n");
-			printf(" \n>Luego la edad del encuestado\n");
-			printf(" \n>Genero:\n(0:masculino), (1:femenino)\n");
-			printf(" \n>Ingreso corresponde a la cantidad de dinero que gana en dolares USD\n");
-			printf(" \n>¿Está enfermo?\n(0:no), (1:si)\n");
+				printf(" \n>Recuerda que id corresponde la posición donde se encuentra el dato\n");
+				printf(" \n>Codigos de ciudad:\n(0:Dallas),(1:New York City),(2:Los Angeles),\n(3:Mountain view),(4:Boston), (5:Washington DC),\n(6:San Diego), (7:Austin), (8:No registra) \n");
+				printf(" \n>Luego la edad del encuestado\n");
+				printf(" \n>Genero:\n(0:masculino), (1:femenino)\n");
+				printf(" \n>Ingreso corresponde a la cantidad de dinero que gana en dolares USD\n");
+				printf(" \n>¿Está enfermo?\n(0:no), (1:si)\n");
 
-  			printf("\n------EN EL ARREGLO:\n\n");
-			printf("El elemento con id %d es:\n", id);
-  			print_item(found_item);
-			printf("------\n\n");
-			} else {
-  			printf("No se encontró ningún elemento con id %d\n", id);
+				printf("\n------EN EL ARREGLO:\n\n");
+				printf("El elemento con id %d es:\n", id);
+				print_item(found_item);
+				printf("------\n\n");
 			}
-
+			else
+			{
+				printf("No se encontró ningún elemento con id %d\n", id);
+			}
 
 			node_t *found_node = find_id_ll(head, id);
-			if (found_node != NULL) {
-			printf("------ EN LA LISTA LIGADA:\n\n");
-			print_item(&found_node->item);
-			printf("------\n\n");
-			} else {
-    		printf("Item not found.\n");
+			if (found_node != NULL)
+			{
+				printf("------ EN LA LISTA LIGADA:\n\n");
+				print_item(&found_node->item);
+				printf("------\n\n");
 			}
-
+			else
+			{
+				printf("Item not found.\n");
+			}
 
 			start = clock();
 			find_id(items, 150000, id);
@@ -176,9 +174,6 @@ void show_menu(items_t items, node_t *head)
 			printf("------\n\n");
 			printf("Tiempo array: %.9f, Tiempo Lista ligada: %.9f \n", cpu_time_used_array, cpu_time_used_ll);
 			printf("------\n\n");
-
-
-
 
 			break;
 
@@ -199,10 +194,8 @@ void show_menu(items_t items, node_t *head)
 				break;
 			}
 
-
 			printf("Escribe el genero: ");
 			printf("Femenino: 0, Masculino: 1 \n");
-
 
 			int new_item_gender;
 			scanf("%i", &new_item_gender);
@@ -224,11 +217,11 @@ void show_menu(items_t items, node_t *head)
 				break;
 			}
 
-			int new_item_income; 
+			int new_item_income;
 			printf("Escribe el ingreso: ");
 			scanf("%i", &new_item_income);
 
-			if (new_item_income < 0 )
+			if (new_item_income < 0)
 			{
 				printf("Este ingreso no puede ser ingresado\n\n");
 				break;
@@ -239,10 +232,10 @@ void show_menu(items_t items, node_t *head)
 			printf("No: 0, Si: 1 \n");
 			scanf("%i", &new_item_illness);
 
-			item_t current_new_item = { new_item_id, new_item_city, new_item_age, new_item_gender, new_item_income, new_item_illness };
-    		// Ingresar registro con id:27, city:mountain view, gender:female, age:66, income:123456, illness:no
+			item_t current_new_item = {new_item_id, new_item_city, new_item_age, new_item_gender, new_item_income, new_item_illness};
+			// Ingresar registro con id:27, city:mountain view, gender:female, age:66, income:123456, illness:no
 			start = clock();
-			item_t *new_array = add_item_in_middle(items, SIZE, current_new_item);
+			add_item_in_middle(items, SIZE, current_new_item);
 			end = clock();
 			cpu_time_used_array = ((double)(end - start)) / CLOCKS_PER_SEC;
 
@@ -250,8 +243,8 @@ void show_menu(items_t items, node_t *head)
 			add_item_in_middle_ll(head, current_new_item);
 			end = clock();
 			cpu_time_used_ll = ((double)(end - start)) / CLOCKS_PER_SEC;
-			
-			printf("Ingresado con exito ");
+
+			printf("Ingresado con exito \n");
 			printf("Tiempo array: %.9f, Tiempo Lista ligada: %.9f \n", cpu_time_used_array, cpu_time_used_ll);
 			printf("------\n\n");
 			break;
@@ -298,9 +291,10 @@ void show_menu(items_t items, node_t *head)
 			printf("------\n\n");
 			// Abrir archivo de reporte si es que existe, en modo a de append y +
 			FILE *report_file = fopen("reporte.txt", "a+");
-			if (report_file == NULL) {
-    			printf("Error al abrir el archivo de reporte\n");
-    			break;
+			if (report_file == NULL)
+			{
+				printf("Error al abrir el archivo de reporte\n");
+				break;
 			}
 
 			// Escribir encabezado con timestamp y nombre de usuario
@@ -313,95 +307,92 @@ void show_menu(items_t items, node_t *head)
 			fprintf(report_file, ">> INICIO DE REPORTE %s\n", asctime(timeinfo));
 			fprintf(report_file, "Nombre de usuario: grupo # 1 \n");
 
+			int NUM_CITIES = 8;
 
-			int NUM_CITIES=8;
-
-    		// Imprimir reporte de datos
-    		fprintf(report_file, "Reporte de datos:\n\n");
+			// Imprimir reporte de datos
+			fprintf(report_file, "Reporte de datos:\n\n");
 			fprintf(report_file, "PUNTO 1: reporte de cantidad de personas por ciudad\n\n");
-    		fprintf(report_file, "Cantidad de ciudadanos: %d\n", count_items(head));
-    		int *citizens_city = citizens_per_city_ll(head);
-    		for (int i = 0; i < NUM_CITIES; i++) {
-        	fprintf(report_file, "Ciudad %s: %d ciudadanos\n", city_names[i], citizens_city[i]);
-    		}
-    		fprintf(report_file, "\n");
+			fprintf(report_file, "Cantidad de ciudadanos: %d\n", count_items(head));
+			int *citizens_city = citizens_per_city_ll(head);
+			for (int i = 0; i < NUM_CITIES; i++)
+			{
+				fprintf(report_file, "Ciudad %s: %d ciudadanos\n", city_names[i], citizens_city[i]);
+			}
+			fprintf(report_file, "\n");
 
-    		// Ciudad:3 que corresponde a mountain view, edad minima 17, edad maxima 36
-    		city_t city = 3;
-    		int min_age = 17, max_age = 36;
-    		double avg_income = average_income_city_range_ll(head, min_age, max_age, city);
+			// Ciudad:3 que corresponde a mountain view, edad minima 17, edad maxima 36
+			city_t city = 3;
+			int min_age = 17, max_age = 36;
+			double avg_income = average_income_city_range_ll(head, min_age, max_age, city);
 			fprintf(report_file, "PUNTO 2: reporte de promedio de ingresos de una ciudad determinada en un rango dado\n\n");
-		    fprintf(report_file, "Promedio de ingresos para ciudadanos de Mountain View entre %d y %d años: %.2f\n\n", min_age, max_age, avg_income);
+			fprintf(report_file, "Promedio de ingresos para ciudadanos de Mountain View entre %d y %d años: %.2f\n\n", min_age, max_age, avg_income);
 
-    		// Edad:21
-    		int age = 21;
-    		int *citizens_age = citizens_per_age_ll(head, age);
+			// Edad:21
+			int age = 21;
+			int *citizens_age = citizens_per_age_ll(head, age);
 			fprintf(report_file, "PUNTO 3: reporte de la probabilidad que una persona de determinada edad esté enferma\n\n");
 			illness_prob = illness_prob_age(items, current_age);
 			fprintf(report_file, "La probabilidad de estar enfermo cuando se tiene 21 o más años es de %.3f%%\n\n", illness_prob);
 
-
 			// Mostrar registro 75902
 			node_t *item = find_id_ll(head, 75902);
 
-			if (item != NULL) {
+			if (item != NULL)
+			{
 				fprintf(report_file, "PUNTO 4: busqueda de un id determinado\n");
 
-				fprintf(report_file," \n>Recuerda que id corresponde la posición donde se encuentra el dato\n");
-				fprintf(report_file," \n>Codigos de ciudad:\n(0:Dallas),(1:New York City),(2:Los Angeles),\n(3:Mountain view),(4:Boston), (5:Washington DC),\n(6:San Diego), (7:Austin), (8:No registra) \n");
-				fprintf(report_file," \n>Luego la edad del encuestado\n");
-				fprintf(report_file," \n>Genero:\n(0:masculino), (1:femenino)\n");
-				fprintf(report_file," \n>Ingreso corresponde a la cantidad de dinero que gana en dolares USD\n");
-				fprintf(report_file," \n>¿Está enfermo?\n(0:no), (1:si)\n");
+				fprintf(report_file, " \n>Recuerda que id corresponde la posición donde se encuentra el dato\n");
+				fprintf(report_file, " \n>Codigos de ciudad:\n(0:Dallas),(1:New York City),(2:Los Angeles),\n(3:Mountain view),(4:Boston), (5:Washington DC),\n(6:San Diego), (7:Austin), (8:No registra) \n");
+				fprintf(report_file, " \n>Luego la edad del encuestado\n");
+				fprintf(report_file, " \n>Genero:\n(0:masculino), (1:femenino)\n");
+				fprintf(report_file, " \n>Ingreso corresponde a la cantidad de dinero que gana en dolares USD\n");
+				fprintf(report_file, " \n>¿Está enfermo?\n(0:no), (1:si)\n");
 
-    			fprintf(report_file, "\nRegistro con id 75902:\n");
-    			fprintf(report_file, "Id: %d\n", item->item.id);
-    			fprintf(report_file, "Ciudad: %d\n", item->item.city);
-    			fprintf(report_file, "Edad: %d\n", item->item.age);
+				fprintf(report_file, "\nRegistro con id 75902:\n");
+				fprintf(report_file, "Id: %d\n", item->item.id);
+				fprintf(report_file, "Ciudad: %d\n", item->item.city);
+				fprintf(report_file, "Edad: %d\n", item->item.age);
 				fprintf(report_file, "Género: %d\n", item->item.gender);
 				fprintf(report_file, "Ingreso USD: %d\n", item->item.income);
 				fprintf(report_file, "¿Está enfermo?: %d\n", item->item.illness);
-    			fprintf(report_file, "\n");
-
-			} else {
-    			fprintf(report_file, "No se encontró un registro con id 75902\n\n");
+				fprintf(report_file, "\n");
+			}
+			else
+			{
+				fprintf(report_file, "No se encontró un registro con id 75902\n\n");
 			}
 
-
-
-    		// Ingresar registro con id:27, city:mountain view, gender:female, age:66, income:123456, illness:no
-    		item_t new_item = { 27, 3, 66, FEMALE, 123456, false };
-    		add_to_list(&head, new_item);
+			// Ingresar registro con id:27, city:mountain view, gender:female, age:66, income:123456, illness:no
+			item_t new_item = {27, 3, 66, FEMALE, 123456, false};
+			add_to_list(&head, new_item);
 			fprintf(report_file, "PUNTO 5: agregar un nuevo registro en un lugar determinado\n\n");
-    		fprintf(report_file, "Se agregó un nuevo registro con los siguientes datos:\n");
-    		print_item(&new_item);
-    		fprintf(report_file, "\n");
+			fprintf(report_file, "Se agregó un nuevo registro con los siguientes datos:\n");
+			print_item(&new_item);
+			fprintf(report_file, "\n");
 
-    		// Edad 30
-    		age = 30;
-    		citizens_age = citizens_per_age_ll(head, age);
-    		fprintf(report_file, "Cantidad de ciudadanos de %d años: %d\n", age, citizens_age[age]);
+			// Edad 30
+			age = 30;
+			citizens_age = citizens_per_age_ll(head, age);
+			fprintf(report_file, "Cantidad de ciudadanos de %d años: %d\n", age, citizens_age[age]);
 
-    		// Comparación de tiempos entre arreglo y lista ligada para buscar el registro con id 27
-    		id = 27;
-    		double cpu_time_used_array, cpu_time_used_ll;
-    		clock_t start, end;
-    		start = clock();
-    		find_id(items, 150000, id);
-    		end = clock();
-    		cpu_time_used_array = ((double)(end - start)) / CLOCKS_PER_SEC;
+			// Comparación de tiempos entre arreglo y lista ligada para buscar el registro con id 27
+			id = 27;
+			double cpu_time_used_array, cpu_time_used_ll;
+			clock_t start, end;
+			start = clock();
+			find_id(items, 150000, id);
+			end = clock();
+			cpu_time_used_array = ((double)(end - start)) / CLOCKS_PER_SEC;
 
-    		start = clock();
-    		find_id_ll(head, id);
-    		end = clock();
-    		cpu_time_used_ll = ((double)(end - start)) / CLOCKS_PER_SEC;
+			start = clock();
+			find_id_ll(head, id);
+			end = clock();
+			cpu_time_used_ll = ((double)(end - start)) / CLOCKS_PER_SEC;
 			fprintf(report_file, "\n");
 
 			fprintf(report_file, "╒═════════════════════════════════════════════════════════════════════╕\n");
-    		fprintf(report_file, "│Tiempo array: %.9f, Tiempo Lista ligada: %.9f \n", cpu_time_used_array, cpu_time_used_ll);
+			fprintf(report_file, "│Tiempo array: %.9f, Tiempo Lista ligada: %.9f \n", cpu_time_used_array, cpu_time_used_ll);
 			fprintf(report_file, "╘═════════════════════════════════════════════════════════════════════╛\n");
-			//fclose(report_file);
-
 
 			// Escribir fin de informe con timestamp
 			fprintf(report_file, "\nFin de reporte %s\n", asctime(timeinfo));
@@ -412,20 +403,19 @@ void show_menu(items_t items, node_t *head)
 			rewind(report_file);
 			char buffer[1000];
 			size_t n;
-			while ((n = fread(buffer, 1, sizeof(buffer), report_file)) > 0) {
-    			fwrite(buffer, 1, n, stdout);
+			while ((n = fread(buffer, 1, sizeof(buffer), report_file)) > 0)
+			{
+				fwrite(buffer, 1, n, stdout);
 			}
 
 			// Cerrar archivo de reporte
 			fclose(report_file);
 
-
-
 			printf("------\n\n");
 			printf("Tiempo array: %.9f, Tiempo Lista ligada: %.9f \n", cpu_time_used_array, cpu_time_used_ll);
 			printf("------\n\n");
 
-    		printf("Reporte generado en el archivo reporte.txt.\n");	
+			printf("Reporte generado en el archivo reporte.txt.\n");
 			break;
 
 		default:
@@ -433,7 +423,6 @@ void show_menu(items_t items, node_t *head)
 		}
 	} while (option != 8);
 }
-
 
 int main(int argc, char *argv[])
 {
@@ -513,37 +502,6 @@ int main(int argc, char *argv[])
 	if (line)
 		free(line);
 
-	// item_t pos_2 = get_from_list(head, 2, SIZE);
-	// printf("Item en la posición 3: id=%u, city=%s, age=%u, gender=%s, income=%d, illness=%s\n",
-	// 	   pos_2.id, city_names[pos_2.city], pos_2.age, gender_names[pos_2.gender], pos_2.income, illness_values[pos_2.illness]);
-
-	// double result = illness_prob_age(items, 65);
-	// double result_ll = illness_prob_age_ll(head, 65);
-	// printf("%.3f%%, %.3f%% illness prob to 65 years\n", result, result_ll);
-
-	// citizens_per_city(items);
-	// citizens_per_city_ll(head);
-
-	// citizens_per_age(items, 65);
-	// citizens_per_age_ll(head, 65);
-
-	// item_t *new_array = add_item_in_middle(items, SIZE, items[0]);
-	// add_item_in_middle_ll(head, items[0]);
-
-	// item_t last_element = get_from_list(head, 150001, 150001);
-
-	// printf("id= %i \n", last_element.id);
-
-	// item_t middle_element = get_from_list(head, 74999, 150001);
-	// printf("id= %i, income= %i \n", items[0].id, items[0].income);
-	// printf("id= %i, income= %i \n", middle_element.id, middle_element.income);
-
-	// printf("(income, id) | new data: (%i, %i), last data: (%i, %i)\n", new_array[75000].income, new_array[75000].id, new_array[150000].income, new_array[150000].id);
-
-	// average_income_city_range(items, 30000, 50000, get_city_t("Dallas"));
-
-	// average_income_city_range_ll(head, 30000, 50000, get_city_t("Dallas") );
 	show_menu(items, head);
 	exit(EXIT_SUCCESS);
 }
-

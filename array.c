@@ -70,7 +70,6 @@ double illness_prob_age(items_t items, int age)
         }
     }
 
-
     double result = (double)total_illness / total;
     result *= 100;
     return result;
@@ -80,14 +79,15 @@ double illness_prob_age(items_t items, int age)
 ejercicio 4: encontrar por id
 Función para encontrar un elemento por su id */
 
-item_t* find_id(item_t *arr, int size, int id) {
-  int index = id - 1; // Índice del elemento en el array
-  if (index < 0 || index >= size) { // Verificar si el índice es válido
-    return NULL; // El índice no es válido, se retorna NULL
-  }
-  return &arr[index]; // Se retorna el puntero al elemento del índice correspondiente
+item_t *find_id(item_t *arr, int size, int id)
+{
+    int index = id - 1; // Índice del elemento en el array
+    if (index < 0 || index >= size)
+    {                // Verificar si el índice es válido
+        return NULL; // El índice no es válido, se retorna NULL
+    }
+    return &arr[index]; // Se retorna el puntero al elemento del índice correspondiente
 }
-
 
 /**
  *
@@ -142,15 +142,14 @@ int *citizens_per_age(items_t items, int age)
     return cities;
 }
 
-
-void print_item(item_t* item) {
+void print_item(item_t *item)
+{
     printf("ID: %d\n", item->id);
     /*printf("City: %s\n", item->city);*/
     printf("City: %d\n", item->city);
-    
+
     /*printf("Age: %s\n", item->age);*/
     printf("Age: %d\n", item->age);
-
 
     /*printf("Gender: %lf\n", item->gender);
     printf("Income: %lf\n", item->income);
@@ -159,9 +158,4 @@ void print_item(item_t* item) {
     printf("Gender: %u\n", item->gender);
     printf("Income: %d\n", item->income);
     printf("Illness: %u\n", item->illness);
-
-
-
 }
-
-
