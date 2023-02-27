@@ -14,6 +14,7 @@ void show_menu(items_t items, node_t *head)
 	int option;
 	clock_t start, end;
 	double cpu_time_used_array, cpu_time_used_ll;
+	
 
 	do
 	{
@@ -288,6 +289,8 @@ void show_menu(items_t items, node_t *head)
 
 		case 7:
 
+			// En este punto 7 generamos un reporte con datos predeterminados por cada punto
+
 			printf("------\n\n");
 			// Abrir archivo de reporte si es que existe, en modo a de append y +
 			FILE *report_file = fopen("reporte.txt", "a+");
@@ -309,9 +312,11 @@ void show_menu(items_t items, node_t *head)
 
 			int NUM_CITIES = 8;
 
+			// PUNTO 1. Invocación al método de reporte de ciudadanos por ciudad
 			// Imprimir reporte de datos
 			fprintf(report_file, "Reporte de datos:\n\n");
-			fprintf(report_file, "PUNTO 1: reporte de cantidad de personas por ciudad\n\n");
+			fprintf(report_file, "                           PUNTO I \n");
+			fprintf(report_file, "Reporte de cantidad de personas por ciudad\n\n");
 			fprintf(report_file, "Cantidad de ciudadanos: %d\n", count_items(head));
 			int *citizens_city = citizens_per_city_ll(head);
 			for (int i = 0; i < NUM_CITIES; i++)
@@ -320,26 +325,68 @@ void show_menu(items_t items, node_t *head)
 			}
 			fprintf(report_file, "\n");
 
-			// Ciudad:3 que corresponde a mountain view, edad minima 17, edad maxima 36
+			start = clock();
+			citizens_per_city(items);
+			end = clock();
+			cpu_time_used_array = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+			start = clock();
+			citizens_per_city_ll(head);
+			end = clock();
+			cpu_time_used_ll = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+			fprintf(report_file, "Benchmark del punto 1:          	          *\n");
+			fprintf(report_file, "╒═════════════════════════════════════════════════════════════════════╕\n");
+			fprintf(report_file, "│Tiempo array: %.9f, Tiempo Lista ligada: %.9f \n", cpu_time_used_array, cpu_time_used_ll);
+			fprintf(report_file, "╘═════════════════════════════════════════════════════════════════════╛\n");
+
+			// PUNTO 2. Invocación al método que busca el promedio de ingresos en USD
+			// La información precargada para el informe es: Ciudad:3 que corresponde a mountain view, edad minima 17, edad maxima 36
 			city_t city = 3;
 			int min_age = 17, max_age = 36;
 			double avg_income = average_income_city_range_ll(head, min_age, max_age, city);
-			fprintf(report_file, "PUNTO 2: reporte de promedio de ingresos de una ciudad determinada en un rango dado\n\n");
+			fprintf(report_file, "                           PUNTO I I\n");
+			fprintf(report_file, "Reporte de promedio de ingresos de una ciudad determinada en un rango dado\n\n");
 			fprintf(report_file, "Promedio de ingresos para ciudadanos de Mountain View entre %d y %d años: %.2f\n\n", min_age, max_age, avg_income);
 
-			// Edad:21
+			start = clock();
+			current_income = average_income_city_range(items, current_min_age, current_max_age, selected_city);
+			end = clock();
+			cpu_time_used_array = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+			start = clock();
+			average_income_city_range_ll(head, current_min_age, current_max_age, selected_city);
+			end = clock();
+			cpu_time_used_ll = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+			fprintf(report_file, "Benchmark del punto 2:          	          * *\n");
+			fprintf(report_file, "╒═════════════════════════════════════════════════════════════════════╕\n");
+			fprintf(report_file, "│Tiempo array: %.9f, Tiempo Lista ligada: %.9f \n", cpu_time_used_array, cpu_time_used_ll);
+			fprintf(report_file, "╘═════════════════════════════════════════════════════════════════════╛\n");
+
+			// PUNTO 3. Invocación al método que arroja la probabilidad de estar enfermo con una edad predeterminada
+			// La información precargada para el informe es: Edad:21
 			int age = 21;
 			int *citizens_age = citizens_per_age_ll(head, age);
-			fprintf(report_file, "PUNTO 3: reporte de la probabilidad que una persona de determinada edad esté enferma\n\n");
+			fprintf(report_file, "                           PUNTO I I I \n");
+			fprintf(report_file, "Reporte de la probabilidad que una persona de determinada edad esté enferma\n\n");
 			illness_prob = illness_prob_age(items, current_age);
 			fprintf(report_file, "La probabilidad de estar enfermo cuando se tiene 21 o más años es de %.3f%%\n\n", illness_prob);
 
-			// Mostrar registro 75902
+			fprintf(report_file, "Benchmark del punto 3:          	          * * *\n");
+			fprintf(report_file, "╒═════════════════════════════════════════════════════════════════════╕\n");
+			fprintf(report_file, "│Tiempo array: %.9f, Tiempo Lista ligada: %.9f \n", cpu_time_used_array, cpu_time_used_ll);
+			fprintf(report_file, "╘═════════════════════════════════════════════════════════════════════╛\n");
+
+
+			// PUNTO 4. Invocación al método que busca un id determinado y trae la información del item
+			// La información precargada para el informe es: Mostrar registro 75902
 			node_t *item = find_id_ll(head, 75902);
 
 			if (item != NULL)
 			{
-				fprintf(report_file, "PUNTO 4: busqueda de un id determinado\n");
+				fprintf(report_file, "                           PUNTO I V \n");
+				fprintf(report_file, "Busqueda de un id determinado\n");
 
 				fprintf(report_file, " \n>Recuerda que id corresponde la posición donde se encuentra el dato\n");
 				fprintf(report_file, " \n>Codigos de ciudad:\n(0:Dallas),(1:New York City),(2:Los Angeles),\n(3:Mountain view),(4:Boston), (5:Washington DC),\n(6:San Diego), (7:Austin), (8:No registra) \n");
@@ -361,24 +408,54 @@ void show_menu(items_t items, node_t *head)
 			{
 				fprintf(report_file, "No se encontró un registro con id 75902\n\n");
 			}
+			// Comparación de tiempos entre arreglo y lista ligada para buscar el registro con id 27
+			id = 75902;
 
-			// Ingresar registro con id:27, city:mountain view, gender:female, age:66, income:123456, illness:no
-			item_t new_item = {27, 3, 66, FEMALE, 123456, false};
-			add_to_list(&head, new_item);
-			fprintf(report_file, "PUNTO 5: agregar un nuevo registro en un lugar determinado\n\n");
-			fprintf(report_file, "Se agregó un nuevo registro con los siguientes datos:\n");
-			print_item(&new_item);
+			start = clock();
+			find_id(items, 150000, id);
+			end = clock();
+			cpu_time_used_array = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+			start = clock();
+			find_id_ll(head, id);
+			end = clock();
+			cpu_time_used_ll = ((double)(end - start)) / CLOCKS_PER_SEC;
 			fprintf(report_file, "\n");
 
+			fprintf(report_file, "Benchmark del punto 4:          	          * * * *\n");
+			fprintf(report_file, "╒═════════════════════════════════════════════════════════════════════╕\n");
+			fprintf(report_file, "│Tiempo array: %.9f, Tiempo Lista ligada: %.9f \n", cpu_time_used_array, cpu_time_used_ll);
+			fprintf(report_file, "╘═════════════════════════════════════════════════════════════════════╛\n");
+
+			// PUNTO 5. Invocación al método que inserta un nodo en la posición 749999
+			// La información precargada para el informe es:  Ingresar registro con id:27, city:mountain view, gender:female, age:66, income:123456, illness:no
+			item_t new_item = {27, 3, 66, FEMALE, 123456, false};
+			add_to_list(&head, new_item);
+			fprintf(report_file, "                           PUNTO   V   \n");
+			fprintf(report_file, "Agregar un nuevo registro en un lugar determinado\n\n");
+			fprintf(report_file, "Se agregó un nuevo registro con los siguientes datos:\n");
+			fprintf(report_file, "nuevo item agregado en la posición 749999: id:27, city:mountain view, gender:female, age:66, income:123456, illness:no\n");
+			//print_item(&new_item);
+			fprintf(report_file, "\n");
+
+			fprintf(report_file, "Benchmark del punto 5:          	          * * * * *\n");
+
+			// PUNTO 6. Invocación al método que busca el promedio de ingresos en USD
+			// La información precargada para el informe es: 
 			// Edad 30
 			age = 30;
 			citizens_age = citizens_per_age_ll(head, age);
+			fprintf(report_file, "                           PUNTO   V  I \n");
+			fprintf(report_file, "Cantidad de ciudadanos en \n\n");
 			fprintf(report_file, "Cantidad de ciudadanos de %d años: %d\n", age, citizens_age[age]);
+
+
+			fprintf(report_file, "Benchmark del punto 5:          	          * * * * *\n");
 
 			// Comparación de tiempos entre arreglo y lista ligada para buscar el registro con id 27
 			id = 27;
-			double cpu_time_used_array, cpu_time_used_ll;
-			clock_t start, end;
+			
+
 			start = clock();
 			find_id(items, 150000, id);
 			end = clock();
@@ -406,6 +483,7 @@ void show_menu(items_t items, node_t *head)
 			while ((n = fread(buffer, 1, sizeof(buffer), report_file)) > 0)
 			{
 				fwrite(buffer, 1, n, stdout);
+				
 			}
 
 			// Cerrar archivo de reporte
