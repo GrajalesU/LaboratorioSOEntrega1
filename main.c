@@ -14,7 +14,6 @@ void show_menu(items_t items, node_t *head)
 	int option;
 	clock_t start, end;
 	double cpu_time_used_array, cpu_time_used_ll;
-	
 
 	do
 	{
@@ -350,7 +349,7 @@ void show_menu(items_t items, node_t *head)
 			fprintf(report_file, "Promedio de ingresos para ciudadanos de Mountain View entre %d y %d años: %.2f\n\n", min_age, max_age, avg_income);
 
 			start = clock();
-			current_income = average_income_city_range(items, current_min_age, current_max_age, selected_city);
+			average_income_city_range(items, current_min_age, current_max_age, selected_city);
 			end = clock();
 			cpu_time_used_array = ((double)(end - start)) / CLOCKS_PER_SEC;
 
@@ -367,14 +366,13 @@ void show_menu(items_t items, node_t *head)
 			// PUNTO 3. Invocación al método que arroja la probabilidad de estar enfermo con una edad predeterminada
 			// La información precargada para el informe es: Edad:21
 			int age = 21;
-			int *citizens_age = citizens_per_age_ll(head, age);
 			fprintf(report_file, "                           PUNTO I I I \n");
 			fprintf(report_file, "Reporte de la probabilidad que una persona de determinada edad esté enferma\n\n");
 			illness_prob = illness_prob_age(items, age);
 			fprintf(report_file, "La probabilidad de estar enfermo cuando se tiene 21 o más años es de %.3f%%\n\n", illness_prob);
 
 			start = clock();
-			illness_prob = illness_prob_age(items, age);
+			illness_prob_age(items, age);
 			end = clock();
 			cpu_time_used_array = ((double)(end - start)) / CLOCKS_PER_SEC;
 
@@ -383,13 +381,10 @@ void show_menu(items_t items, node_t *head)
 			end = clock();
 			cpu_time_used_ll = ((double)(end - start)) / CLOCKS_PER_SEC;
 
-
-
 			fprintf(report_file, "Benchmark del punto 3:          	          * * *\n");
 			fprintf(report_file, "╒═════════════════════════════════════════════════════════════════════╕\n");
 			fprintf(report_file, "│Tiempo array: %.9f, Tiempo Lista ligada: %.9f \n", cpu_time_used_array, cpu_time_used_ll);
 			fprintf(report_file, "╘═════════════════════════════════════════════════════════════════════╛\n");
-
 
 			// PUNTO 4. Invocación al método que busca un id determinado y trae la información del item
 			// La información precargada para el informe es: Mostrar registro 75902
@@ -447,7 +442,7 @@ void show_menu(items_t items, node_t *head)
 			fprintf(report_file, "Agregar un nuevo registro en un lugar determinado\n\n");
 			fprintf(report_file, "Se agregó un nuevo registro con los siguientes datos:\n");
 			fprintf(report_file, "nuevo item agregado en la posición 749999: id:27, city:mountain view, gender:female, age:66, income:123456, illness:no\n");
-			//print_item(&new_item);
+			// print_item(&new_item);
 
 			item_t current_new_item2 = {27, 3, 66, FEMALE, 123456, false};
 
@@ -461,7 +456,6 @@ void show_menu(items_t items, node_t *head)
 			end = clock();
 			cpu_time_used_ll = ((double)(end - start)) / CLOCKS_PER_SEC;
 
-
 			fprintf(report_file, "\n");
 
 			fprintf(report_file, "Benchmark del punto 5:          	          * * * * *\n");
@@ -470,10 +464,9 @@ void show_menu(items_t items, node_t *head)
 			fprintf(report_file, "╘═════════════════════════════════════════════════════════════════════╛\n");
 
 			// PUNTO 6. Invocación al método que busca el promedio de ingresos en USD
-			// La información precargada para el informe es: 
+			// La información precargada para el informe es:
 			// Edad 30
-			int edad= 30;
-			citizens_age = citizens_per_age_ll(head, age);
+			int edad = 30;
 
 			start = clock();
 			cities_per_age = citizens_per_age(items, edad);
@@ -485,23 +478,21 @@ void show_menu(items_t items, node_t *head)
 			end = clock();
 			cpu_time_used_ll = ((double)(end - start)) / CLOCKS_PER_SEC;
 
-
 			fprintf(report_file, "                           PUNTO   V  I \n");
 			fprintf(report_file, "Reporte de cantidad de personas que viven en una ciudad determinada con determinada edad \n\n");
 			fprintf(report_file, "Cantidad de ciudadanos de 30 años\n\n");
 
-			fprintf(report_file,"------\n");
-			fprintf(report_file,"Dallas: %i ,", cities_per_age[0]);
-			fprintf(report_file,"New York City: %i ,", cities_per_age[1]);
-			fprintf(report_file,"Los Angeles: %i \n", cities_per_age[2]);
-			fprintf(report_file,"Mountain View: %i ,", cities_per_age[3]);
-			fprintf(report_file,"Boston: %i ,", cities_per_age[4]);
-			fprintf(report_file,"Washington D.C: %i \n", cities_per_age[5]);
-			fprintf(report_file,"San Diego: %i ,", cities_per_age[6]);
-			fprintf(report_file,"Austin: %i ,", cities_per_age[7]);
-			fprintf(report_file,"No registra: %i \n", cities_per_age[8]);
-			fprintf(report_file,"------\n\n");
-
+			fprintf(report_file, "------\n");
+			fprintf(report_file, "Dallas: %i ,", cities_per_age[0]);
+			fprintf(report_file, "New York City: %i ,", cities_per_age[1]);
+			fprintf(report_file, "Los Angeles: %i \n", cities_per_age[2]);
+			fprintf(report_file, "Mountain View: %i ,", cities_per_age[3]);
+			fprintf(report_file, "Boston: %i ,", cities_per_age[4]);
+			fprintf(report_file, "Washington D.C: %i \n", cities_per_age[5]);
+			fprintf(report_file, "San Diego: %i ,", cities_per_age[6]);
+			fprintf(report_file, "Austin: %i ,", cities_per_age[7]);
+			fprintf(report_file, "No registra: %i \n", cities_per_age[8]);
+			fprintf(report_file, "------\n\n");
 
 			fprintf(report_file, "Benchmark del punto 6:          	          * * * * *\n");
 			fprintf(report_file, "╒═════════════════════════════════════════════════════════════════════╕\n");
@@ -520,7 +511,6 @@ void show_menu(items_t items, node_t *head)
 			while ((n = fread(buffer, 1, sizeof(buffer), report_file)) > 0)
 			{
 				fwrite(buffer, 1, n, stdout);
-				
 			}
 
 			// Cerrar archivo de reporte
