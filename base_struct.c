@@ -2,27 +2,27 @@
 #include "base_struct.h"
 
 const char *const city_names[] = {
-		[D] = "Dallas",
-		[N] = "New York City",
-		[L] = "Los Angeles",
-		[M] = "Mountain View",
-		[B] = "Boston",
-		[W] = "Washington D.C.",
-		[S] = "San Diego",
-		[A] = "Austin",
-		[E] = "Error",
+	[D] = "Dallas",
+	[N] = "New York City",
+	[L] = "Los Angeles",
+	[M] = "Mountain View",
+	[B] = "Boston",
+	[W] = "Washington D.C.",
+	[S] = "San Diego",
+	[A] = "Austin",
+	[E] = "Error",
 };
 
 const char *const gender_names[] = {
-		[FEMALE] = "Female",
-		[MALE] = "Male",
-		[NO] = "No",
+	[FEMALE] = "Female",
+	[MALE] = "Male",
+	[NO] = "No",
 };
 
 const char *const illness_values[] = {
-		[false] = "No",
-		[true] = "Yes",
-		[fuzzy] = "Not defined",
+	[false] = "No",
+	[true] = "Yes",
+	[fuzzy] = "Not defined",
 };
 
 city_t get_city_t(char *city_name)

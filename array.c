@@ -75,7 +75,7 @@ double illness_prob_age(items_t items, int age)
     return result;
 }
 
-/* 
+/*
 ejercicio 4: encontrar por id
 Función para encontrar un elemento por su id */
 
@@ -145,16 +145,8 @@ int *citizens_per_age(items_t items, int age)
 void print_item(item_t *item)
 {
     printf("ID: %d\n", item->id);
-    /*printf("City: %s\n", item->city);*/
     printf("City: %d\n", item->city);
-
-    /*printf("Age: %s\n", item->age);*/
     printf("Age: %d\n", item->age);
-
-    /*printf("Gender: %lf\n", item->gender);
-    printf("Income: %lf\n", item->income);
-    printf("Illness: %lf\n", item->illness);*/
-
     printf("Gender: %u\n", item->gender);
     printf("Income: %d\n", item->income);
     printf("Illness: %u\n", item->illness);
