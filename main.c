@@ -462,27 +462,27 @@ void show_menu(items_t items, node_t *head)
 			// Edad 30
 			age = 30;
 			citizens_age = citizens_per_age_ll(head, age);
+
+			start = clock();
+			cities_per_age = citizens_per_age(items, citizen_age);
+			end = clock();
+			cpu_time_used_array = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+			start = clock();
+			citizens_per_age_ll(head, citizen_age);
+			end = clock();
+			cpu_time_used_ll = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+
 			fprintf(report_file, "                           PUNTO   V  I \n");
 			fprintf(report_file, "Reporte de cantidad de personas que viven en una ciudad determinada con determinada edad \n\n");
-			fprintf(report_file, "Cantidad de ciudadanos de %d años: %d\n", age, citizens_age[age]);
+			fprintf(report_file, "Cantidad de ciudadanos de %ls años: %ls\n", citizens_age, citizens_per_age(items, citizen_age));
 
 
 
 
 			// Comparación de tiempos entre arreglo y lista ligada para buscar el registro con id 27
-			id = 27;
 			
-
-			start = clock();
-			find_id(items, 150000, id);
-			end = clock();
-			cpu_time_used_array = ((double)(end - start)) / CLOCKS_PER_SEC;
-
-			start = clock();
-			find_id_ll(head, id);
-			end = clock();
-			cpu_time_used_ll = ((double)(end - start)) / CLOCKS_PER_SEC;
-			fprintf(report_file, "\n");
 
 			fprintf(report_file, "Benchmark del punto 6:          	          * * * * *\n");
 			fprintf(report_file, "╒═════════════════════════════════════════════════════════════════════╕\n");
