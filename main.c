@@ -436,9 +436,26 @@ void show_menu(items_t items, node_t *head)
 			fprintf(report_file, "Se agregó un nuevo registro con los siguientes datos:\n");
 			fprintf(report_file, "nuevo item agregado en la posición 749999: id:27, city:mountain view, gender:female, age:66, income:123456, illness:no\n");
 			//print_item(&new_item);
+
+			item_t current_new_item2 = {27, 3, 66, FEMALE, 123456, false};
+
+			start = clock();
+			add_item_in_middle(items, SIZE, current_new_item2);
+			end = clock();
+			cpu_time_used_array = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+			start = clock();
+			add_item_in_middle_ll(head, current_new_item2);
+			end = clock();
+			cpu_time_used_ll = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+
 			fprintf(report_file, "\n");
 
 			fprintf(report_file, "Benchmark del punto 5:          	          * * * * *\n");
+			fprintf(report_file, "╒═════════════════════════════════════════════════════════════════════╕\n");
+			fprintf(report_file, "│Tiempo array: %.9f, Tiempo Lista ligada: %.9f \n", cpu_time_used_array, cpu_time_used_ll);
+			fprintf(report_file, "╘═════════════════════════════════════════════════════════════════════╛\n");
 
 			// PUNTO 6. Invocación al método que busca el promedio de ingresos en USD
 			// La información precargada para el informe es: 
@@ -446,11 +463,11 @@ void show_menu(items_t items, node_t *head)
 			age = 30;
 			citizens_age = citizens_per_age_ll(head, age);
 			fprintf(report_file, "                           PUNTO   V  I \n");
-			fprintf(report_file, "Cantidad de ciudadanos en \n\n");
+			fprintf(report_file, "Reporte de cantidad de personas que viven en una ciudad determinada con determinada edad \n\n");
 			fprintf(report_file, "Cantidad de ciudadanos de %d años: %d\n", age, citizens_age[age]);
 
 
-			fprintf(report_file, "Benchmark del punto 5:          	          * * * * *\n");
+
 
 			// Comparación de tiempos entre arreglo y lista ligada para buscar el registro con id 27
 			id = 27;
@@ -467,6 +484,7 @@ void show_menu(items_t items, node_t *head)
 			cpu_time_used_ll = ((double)(end - start)) / CLOCKS_PER_SEC;
 			fprintf(report_file, "\n");
 
+			fprintf(report_file, "Benchmark del punto 6:          	          * * * * *\n");
 			fprintf(report_file, "╒═════════════════════════════════════════════════════════════════════╕\n");
 			fprintf(report_file, "│Tiempo array: %.9f, Tiempo Lista ligada: %.9f \n", cpu_time_used_array, cpu_time_used_ll);
 			fprintf(report_file, "╘═════════════════════════════════════════════════════════════════════╛\n");
