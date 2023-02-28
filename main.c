@@ -370,8 +370,20 @@ void show_menu(items_t items, node_t *head)
 			int *citizens_age = citizens_per_age_ll(head, age);
 			fprintf(report_file, "                           PUNTO I I I \n");
 			fprintf(report_file, "Reporte de la probabilidad que una persona de determinada edad esté enferma\n\n");
-			illness_prob = illness_prob_age(items, current_age);
+			illness_prob = illness_prob_age(items, age);
 			fprintf(report_file, "La probabilidad de estar enfermo cuando se tiene 21 o más años es de %.3f%%\n\n", illness_prob);
+
+			start = clock();
+			illness_prob = illness_prob_age(items, age);
+			end = clock();
+			cpu_time_used_array = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+			start = clock();
+			illness_prob_age_ll(head, age);
+			end = clock();
+			cpu_time_used_ll = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+
 
 			fprintf(report_file, "Benchmark del punto 3:          	          * * *\n");
 			fprintf(report_file, "╒═════════════════════════════════════════════════════════════════════╕\n");
