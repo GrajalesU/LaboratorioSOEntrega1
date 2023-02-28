@@ -460,29 +460,36 @@ void show_menu(items_t items, node_t *head)
 			// PUNTO 6. Invocación al método que busca el promedio de ingresos en USD
 			// La información precargada para el informe es: 
 			// Edad 30
-			age = 30;
+			int edad= 30;
 			citizens_age = citizens_per_age_ll(head, age);
 
 			start = clock();
-			cities_per_age = citizens_per_age(items, citizen_age);
+			cities_per_age = citizens_per_age(items, edad);
 			end = clock();
 			cpu_time_used_array = ((double)(end - start)) / CLOCKS_PER_SEC;
 
 			start = clock();
-			citizens_per_age_ll(head, citizen_age);
+			citizens_per_age_ll(head, edad);
 			end = clock();
 			cpu_time_used_ll = ((double)(end - start)) / CLOCKS_PER_SEC;
 
 
 			fprintf(report_file, "                           PUNTO   V  I \n");
 			fprintf(report_file, "Reporte de cantidad de personas que viven en una ciudad determinada con determinada edad \n\n");
-			fprintf(report_file, "Cantidad de ciudadanos de %ls años: %ls\n", citizens_age, citizens_per_age(items, citizen_age));
+			fprintf(report_file, "Cantidad de ciudadanos de 30 años\n\n");
 
+			fprintf(report_file,"------\n");
+			fprintf(report_file,"Dallas: %i ,", cities_per_age[0]);
+			fprintf(report_file,"New York City: %i ,", cities_per_age[1]);
+			fprintf(report_file,"Los Angeles: %i \n", cities_per_age[2]);
+			fprintf(report_file,"Mountain View: %i ,", cities_per_age[3]);
+			fprintf(report_file,"Boston: %i ,", cities_per_age[4]);
+			fprintf(report_file,"Washington D.C: %i \n", cities_per_age[5]);
+			fprintf(report_file,"San Diego: %i ,", cities_per_age[6]);
+			fprintf(report_file,"Austin: %i ,", cities_per_age[7]);
+			fprintf(report_file,"No registra: %i \n", cities_per_age[8]);
+			fprintf(report_file,"------\n\n");
 
-
-
-			// Comparación de tiempos entre arreglo y lista ligada para buscar el registro con id 27
-			
 
 			fprintf(report_file, "Benchmark del punto 6:          	          * * * * *\n");
 			fprintf(report_file, "╒═════════════════════════════════════════════════════════════════════╕\n");
